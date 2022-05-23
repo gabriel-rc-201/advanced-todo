@@ -55,13 +55,18 @@ informações da tarefa:
       **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor.
 
 ##TELAS:
+
 Login:
 ![login](./img/login.png)
+
 Dashboard:
 ![dashboard](./img/dashboard.png)
+
 Todo List:
 ![todo-list](./img/todo-list.png)
+
 Edit Todo List:
 ![edit-todo-list](./img/edit-todo.png)
+
 Profile:
 ![profile](./img/profile.png)
