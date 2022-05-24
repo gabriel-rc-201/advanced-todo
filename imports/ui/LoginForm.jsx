@@ -1,6 +1,7 @@
+import { Box, TextField, Button } from "@mui/material";
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
-import { Navigate, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -16,33 +17,32 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={submit}>
+    <Box component="form" onSubmit={submit} className="login-form">
       <div>
-        <label htmlFor="username">Username</label>
-        <input
+        <TextField
+          label="username"
+          variant="outlined"
           type="text"
-          placeholder="Username"
           name="username"
-          required
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
 
       <div>
-        <label htmlFor="password">Password</label>
-
-        <input
+        <TextField
+          label="password"
           type="password"
-          placeholder="Password"
           name="password"
+          variant="outlined"
           required
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-
       <div>
-        <button type="submit">Log In</button>
+        <Button type="submit" variant="contained">
+          Log In
+        </Button>
       </div>
-    </form>
+    </Box>
   );
 };

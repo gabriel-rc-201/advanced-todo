@@ -5,6 +5,5 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export const ProtectedRoutes = () => {
   const user = useTracker(() => Meteor.user());
-  console.log(user);
   return user ? <Outlet /> : <Navigate to="/" />;
 };
