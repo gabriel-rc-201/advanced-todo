@@ -1,13 +1,10 @@
 import React from "react";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
+import { Navigate, Outlet } from "react-router-dom";
 
-export const App = () => {
+export const ProtectedRoutes = () => {
   const user = useTracker(() => Meteor.user());
-
-  return (
-    <div>
-      <p>Bem vindo ao todo list {user.username}</p>
-    </div>
-  );
+  console.log(user);
+  return user ? <Outlet /> : <Navigate to="/" />;
 };
