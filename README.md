@@ -42,7 +42,7 @@ informações da tarefa:
 - [ ] Drawer com dois links, um para acessar a lista de tarefas e outro para acessar os dados do usuário logado. Os dados (foto, nome e email) do usuário logado devem estar visíveis na parte de cima do Drawer.
 - [ ] Altere a tela de boas vindas, que é apresentada quando o usuário faz login, para exibir um Dashboard das tarefas contendo as informações (que podem ser implementadas com cards): Total de Tarefas Cadastradas, Total de Tarefas em Andamento e Total de Tarefas Concluídas. Nesse dashboard deve ter também uma ação para acessar a lista com todas as tarefas.
 
-**EXTRAS**
+## EXTRAS
 
 - [ ] Ajuste visualmente sua aplicação para exercitar seus conhecimentos de CSS e criação de componentes REAC
 - [ ] Na lista de tarefas deve ser inserido um checkbox que permite exibir também as tarefas concluídas. Quando ele está desmarcado é para exibir somente as tarefas nas situações “Cadastrada” e “Em Andamento”. (Sugestão: Utilize ReactiveVar do Meteor)
@@ -54,7 +54,7 @@ informações da tarefa:
       **Observação:** Utilize SKIP e LIMIT nas pesquisas via MongoDB.
       **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor.
 
-##TELAS:
+## TELAS
 
 Login:
 
