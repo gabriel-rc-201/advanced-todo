@@ -1,8 +1,8 @@
 # advanced-todo
 
-- [ ] criar uma aplicação com loggin e senha;
-- [ ] Adicione rotas na sua aplicação utilizando o pacote React Router
-- [ ] O sistema deverá ter uma tela de boas vindas e pelo menos uma tela que listará as tarefas
+- [x] criar uma aplicação com loggin e senha;
+- [x] Adicione rotas na sua aplicação utilizando o pacote React Router
+- [x] O sistema deverá ter uma tela de boas vindas e pelo menos uma tela que listará as tarefas
 - [ ] Implemente um TodoList simples nesta tela, utilizando o pacote Material-UI
 
   - [ ] implementada com o componente List
