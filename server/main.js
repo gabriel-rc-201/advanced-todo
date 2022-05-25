@@ -9,6 +9,7 @@ const insertTask = (taskText, user) =>
   TasksCollection.insert({
     text: taskText,
     userId: user._id,
+    author: user.username,
     createdAt: new Date(),
   });
 
@@ -21,8 +22,13 @@ Meteor.startup(() => {
       username: SEED_USERNAME,
       password: SEED_PASSWORD,
     });
+    Accounts.createUser({
+      username: "teste",
+      password: "senha",
+    });
   }
 
+  const userteste = Accounts.findUserByUsername("teste");
   const user = Accounts.findUserByUsername(SEED_USERNAME);
 
   if (TasksCollection.find().count() === 0) {
@@ -35,5 +41,13 @@ Meteor.startup(() => {
       "Sixth Task",
       "Seventh Task",
     ].forEach((taskText) => insertTask(taskText, user));
+
+    [
+      "tarefa teste 1",
+      "tarefa teste 2",
+      "tarefa teste 3",
+      "tarefa teste 4",
+      "tarefa teste 5",
+    ].forEach((taskText) => insertTask(taskText, userteste));
   }
 });
