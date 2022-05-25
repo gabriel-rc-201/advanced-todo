@@ -2,10 +2,12 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
+
+  const navigate = useNavigate();
 
   return (
     <Box className="login-form">
@@ -51,16 +53,16 @@ export const App = () => {
           <Typography>total de tarefas a serem conculuídas</Typography>
         </Box>
         <Box
+          component="button"
           sx={{
             width: 150,
             height: 150,
             backgroundColor: "primary.main",
             textAlign: "center",
           }}
+          onClick={() => navigate("/Tasks")}
         >
-          <Typography>
-            <Link to="/Tasks">To Do's List</Link>
-          </Typography>
+          <Typography>To Do's List</Typography>
         </Box>
       </Box>
     </Box>

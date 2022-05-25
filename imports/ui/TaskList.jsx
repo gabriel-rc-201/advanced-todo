@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Box, List, Button, Typography } from "@mui/material";
+import { ExitToApp, Logout } from "@mui/icons-material";
+
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 
 import { TasksCollection } from "../db/TasksCollection";
 import { Task } from "./Tasks";
-import { useNavigate } from "react-router-dom";
-
-const toggleChecked = ({ _id, isChecked }) => {
-  Meteor.call("tasks.setIsChecked", _id, !isChecked);
-};
 
 const deleteTask = ({ _id }) => Meteor.call("tasks.remove", _id);
 
@@ -46,30 +45,28 @@ export const TaskList = () => {
   };
 
   return (
-    <div className="main">
-      <>
-        <div className="user" onClick={logout}>
-          {user.username || user.profile.name} 🚪
-        </div>
-        <div className="filter">
-          <button onClick={() => setHideCompleted(!hideCompleted)}>
-            {hideCompleted ? "Show All" : "Hide Completed"}
-          </button>
-        </div>
+    <Box className="main">
+      <Box className="user" onClick={logout}>
+        <Typography>{user.username || user.profile.name}</Typography>
+        <ExitToApp sx={{ color: "red" }} />
+        <Logout sx={{ color: "red" }} />
+      </Box>
+      <Box className="filter">
+        <Button
+          variant="contained"
+          onClick={() => setHideCompleted(!hideCompleted)}
+        >
+          {hideCompleted ? "Show All" : "Hide Completed"}
+        </Button>
+      </Box>
 
-        {isLoading && <div className="loading">loading...</div>}
+      {isLoading && <Box className="loading">loading...</Box>}
 
-        <ul className="tasks">
-          {tasks.map((task) => (
-            <Task
-              key={task._id}
-              task={task}
-              onCheckboxClick={toggleChecked}
-              onDeleteClick={deleteTask}
-            />
-          ))}
-        </ul>
-      </>
-    </div>
+      <List className="tasks" sx={{ bgcolor: "background.paper" }}>
+        {tasks.map((task) => (
+          <Task key={task._id} task={task} onDeleteClick={deleteTask} />
+        ))}
+      </List>
+    </Box>
   );
 };
