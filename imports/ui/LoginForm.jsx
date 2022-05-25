@@ -1,4 +1,4 @@
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, Typography } from "@mui/material";
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,17 +18,22 @@ export const LoginForm = () => {
 
   return (
     <Box component="form" onSubmit={submit} className="login-form">
-      <div>
+      <Typography variant="h1" align="center" fontSize={30} gutterBottom>
+        Bem Vindo ao To Do's List
+      </Typography>
+
+      <Box>
         <TextField
           label="username"
           variant="outlined"
           type="text"
           name="username"
+          required
           onChange={(e) => setUsername(e.target.value)}
         />
-      </div>
+      </Box>
 
-      <div>
+      <Box>
         <TextField
           label="password"
           type="password"
@@ -37,12 +42,12 @@ export const LoginForm = () => {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
-      <div>
+      </Box>
+      <Box>
         <Button type="submit" variant="contained">
           Log In
         </Button>
-      </div>
+      </Box>
     </Box>
   );
 };
