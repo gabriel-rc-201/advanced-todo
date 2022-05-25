@@ -3,15 +3,15 @@
 - [x] criar uma aplicação com loggin e senha;
 - [x] Adicione rotas na sua aplicação utilizando o pacote React Router
 - [x] O sistema deverá ter uma tela de boas vindas e pelo menos uma tela que listará as tarefas
-- [ ] Implemente um TodoList simples nesta tela, utilizando o pacote Material-UI
+- [x] Implemente um TodoList simples nesta tela, utilizando o pacote Material-UI
 
-  - [ ] implementada com o componente List
-  - [ ] exibindo um ícone, o nome da tarefa no texto primário e o nome do usuário que criou a tarefa no texto secundário
-  - [ ] Todos os demais componentes utilizados na interação com o usuário deverão ser do pacote Material-UI
+  - [x] implementada com o componente List
+  - [x] exibindo um ícone, o nome da tarefa no texto primário e o nome do usuário que criou a tarefa no texto secundário
+  - [x] Todos os demais componentes utilizados na interação com o usuário deverão ser do pacote Material-UI
 
   Na lista de tarefas
 
-  - [ ] deve conter um botão de ícone para removê-la e outro para editá-la.
+  - [x] deve conter um botão de ícone para removê-la e outro para editá-la.
   - [ ] tela de edição
     - [ ] editar as informações da sua tarefa e salvar essa alteração, retornando para a tela anterior.
           2 estados:
