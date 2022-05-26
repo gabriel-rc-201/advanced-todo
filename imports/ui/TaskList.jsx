@@ -26,7 +26,7 @@ export const TaskList = () => {
     if (!handler.ready()) return { tasks: [], isLoading: true };
 
     const tasks = TasksCollection.find(userFilter, {
-      sort: { createdAt: 1 },
+      sort: { createdAt: -1 },
     }).fetch();
 
     return { tasks };

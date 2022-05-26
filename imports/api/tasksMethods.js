@@ -18,7 +18,7 @@ const schema = new SimpleSchema(
     date: { type: Date },
     status: {
       type: String,
-      allowedValues: ["cadastrada", "andamento", "comcluida"],
+      allowedValues: ["cadastrada", "em andamento", "comcluida"],
     },
   },
   { check }

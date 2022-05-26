@@ -15,7 +15,7 @@ export const Task = ({ task, onDeleteClick }) => {
       <ListItemIcon>
         <Assignment sx={{ color: "yellow" }} />
       </ListItemIcon>
-      <ListItemText primary={task.text} secondary={task.author} />
+      <ListItemText primary={task.name} secondary={task.author} />
       <ListItemIcon>
         <ListItemButton
           edg="end"
