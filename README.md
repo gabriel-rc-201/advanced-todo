@@ -25,7 +25,7 @@ informações da tarefa:
 - Situação;
   - Cadastrada;
   - Em andamento;
-  - Comcluída.
+  - Comcluída.  
     **NOTA:** Na tela de visualização deve existir um comando que passa a tarefa de Cadastrada para Em Andamento, um que passa a tarefa de Em Andamento para Concluída e um outro que passa a tarefa para Cadastrada, independente do estado que ela esteja. Lembre-se de deixar o comando desabilitado quando não for possível realizar uma transição (Exemplo: O usuário não pode clicar na ação Concluir sem que a tarefa esteja na situação Em Andamento)
 - Data;
 - e usuários que criou a tarefa.
