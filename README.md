@@ -12,8 +12,8 @@
   Na lista de tarefas
 
   - [x] deve conter um botão de ícone para removê-la e outro para editá-la.
-  - [ ] tela de edição
-    - [ ] editar as informações da sua tarefa e salvar essa alteração, retornando para a tela anterior.
+  - [x] tela de edição
+    - [x] editar as informações da sua tarefa e salvar essa alteração, retornando para a tela anterior.
           2 estados:
       - visualização;
       - edição.
