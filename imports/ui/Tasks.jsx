@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Delete, Assignment, Edit } from "@mui/icons-material";
 import {
   ListItem,
@@ -8,6 +9,7 @@ import {
 } from "@mui/material";
 
 export const Task = ({ task, onDeleteClick }) => {
+  const navigate = useNavigate();
   return (
     <ListItem className={task.isChecked ? "checked" : ""} disablePadding>
       <ListItemIcon>
@@ -15,7 +17,10 @@ export const Task = ({ task, onDeleteClick }) => {
       </ListItemIcon>
       <ListItemText primary={task.text} secondary={task.author} />
       <ListItemIcon>
-        <ListItemButton edg="end">
+        <ListItemButton
+          edg="end"
+          onClick={() => navigate("/EditTask", { state: { task } })}
+        >
           <Edit />
         </ListItemButton>
         <ListItemButton edge="end" onClick={() => onDeleteClick(task)}>
