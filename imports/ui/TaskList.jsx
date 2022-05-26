@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, List, Button, Typography } from "@mui/material";
+import { Box, List, Typography } from "@mui/material";
 import { ExitToApp, Logout } from "@mui/icons-material";
 
 import { Meteor } from "meteor/meteor";
@@ -14,10 +14,6 @@ const deleteTask = ({ _id }) => Meteor.call("tasks.remove", _id);
 export const TaskList = () => {
   const user = useTracker(() => Meteor.user());
 
-  const [hideCompleted, setHideCompleted] = useState(false);
-
-  const hideCompletedFilter = { isChecked: { $ne: true } };
-
   const userFilter = user ? { userId: user._id } : {};
 
   const { tasks, isLoading } = useTracker(() => {
@@ -29,10 +25,9 @@ export const TaskList = () => {
 
     if (!handler.ready()) return { tasks: [], isLoading: true };
 
-    const tasks = TasksCollection.find(
-      hideCompleted ? hideCompletedFilter : userFilter,
-      { sort: { createdAt: 1 } }
-    ).fetch();
+    const tasks = TasksCollection.find(userFilter, {
+      sort: { createdAt: 1 },
+    }).fetch();
 
     return { tasks };
   });
@@ -50,14 +45,6 @@ export const TaskList = () => {
         <Typography>{user.username || user.profile.name}</Typography>
         <ExitToApp sx={{ color: "red" }} />
         <Logout sx={{ color: "red" }} />
-      </Box>
-      <Box className="filter">
-        <Button
-          variant="contained"
-          onClick={() => setHideCompleted(!hideCompleted)}
-        >
-          {hideCompleted ? "Show All" : "Hide Completed"}
-        </Button>
       </Box>
 
       {isLoading && <Box className="loading">loading...</Box>}
