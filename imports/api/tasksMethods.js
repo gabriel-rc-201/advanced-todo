@@ -1,17 +1,41 @@
 import { Meteor } from "meteor/meteor";
 import { check } from "meteor/check";
 import { TasksCollection } from "../db/TasksCollection";
+import SimpleSchema from "simpl-schema";
+
+SimpleSchema.defineValidationErrorTransform((error) => {
+  const ddpError = new Meteor.Error(error.message);
+  ddpError.error = "validation-error";
+  ddpError.details = error.details;
+  return ddpError;
+});
+
+const schema = new SimpleSchema(
+  {
+    text: { type: String },
+    author: { type: String },
+    description: { type: String },
+    status: {
+      type: String,
+      allowedValues: ["cadastrda", "andamento", "comcluida"],
+    },
+  },
+  { check }
+);
 
 Meteor.methods({
-  "tasks.insert"(text) {
-    check(text, String);
+  "tasks.insert"(text, author, status, description) {
+    schema.validate({ text, author, status, description });
 
     if (!this.userId) throw new Meteor.Error("Not authorized.");
 
     TasksCollection.insert({
-      text,
-      createdAt: new Date(),
       userId: this.userId,
+      author,
+      text,
+      description,
+      status,
+      createdAt: new Date(),
     });
   },
 
