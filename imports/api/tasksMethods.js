@@ -12,29 +12,31 @@ SimpleSchema.defineValidationErrorTransform((error) => {
 
 const schema = new SimpleSchema(
   {
-    text: { type: String },
+    name: { type: String },
     author: { type: String },
     description: { type: String },
+    date: { type: Date },
     status: {
       type: String,
-      allowedValues: ["cadastrda", "andamento", "comcluida"],
+      allowedValues: ["cadastrada", "andamento", "comcluida"],
     },
   },
   { check }
 );
 
 Meteor.methods({
-  "tasks.insert"(text, author, status, description) {
-    schema.validate({ text, author, status, description });
+  "tasks.insert"(name, author, status, description, date) {
+    schema.validate({ name, author, status, description, date });
 
     if (!this.userId) throw new Meteor.Error("Not authorized.");
 
     TasksCollection.insert({
       userId: this.userId,
       author,
-      text,
+      name,
       description,
       status,
+      date,
       createdAt: new Date(),
     });
   },
@@ -51,18 +53,24 @@ Meteor.methods({
     TasksCollection.remove(taskId);
   },
 
-  "tasks.setIsChecked"(taskId, isChecked) {
-    check(taskId, String);
-    check(isChecked, Boolean);
+  "tasks.edit"(taskUpdated) {
+    const { _id, name, description, author, status, date } = taskUpdated;
+
+    schema.validate({ name, author, status, description, date });
+
+    check(_id, String);
 
     if (!this.userId) throw new Meteor.Error("Not authorized");
 
-    const task = TasksCollection.findOne({ _id: taskId, userId: this.userId });
+    const task = TasksCollection.findOne({
+      _id,
+      userId: this.userId,
+    });
 
     if (!task) throw new Meteor.Error("Access denied");
 
-    TasksCollection.update(taskId, {
-      $set: { isChecked },
+    TasksCollection.update(_id, {
+      $set: { name, description, status, date, updatedAt: new Date() },
     });
   },
 });

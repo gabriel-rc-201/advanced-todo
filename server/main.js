@@ -5,13 +5,14 @@ import { TasksCollection } from "../imports/db/TasksCollection";
 import "../imports/api/tasksMethods";
 import "../imports/api/tasksPublications";
 
-const insertTask = (taskText, taskDescription, taskStatus, user) =>
+const insertTask = (taskName, taskDescription, taskStatus, user) =>
   TasksCollection.insert({
     userId: user._id,
     author: user.username,
-    text: taskText,
+    name: taskName,
     description: taskDescription,
     status: taskStatus,
+    date: new Date(),
     createdAt: new Date(),
   });
 
@@ -42,8 +43,8 @@ Meteor.startup(() => {
       "Fifth Task",
       "Sixth Task",
       "Seventh Task",
-    ].forEach((taskText) =>
-      insertTask(taskText, "lorem impsum description", "cadastrada", user)
+    ].forEach((taskName) =>
+      insertTask(taskName, "lorem impsum description", "cadastrada", user)
     );
 
     [
@@ -52,8 +53,8 @@ Meteor.startup(() => {
       "tarefa teste 3",
       "tarefa teste 4",
       "tarefa teste 5",
-    ].forEach((taskText) =>
-      insertTask(taskText, "lorem impsum description", "cadastrada", userteste)
+    ].forEach((taskName) =>
+      insertTask(taskName, "lorem impsum description", "cadastrada", userteste)
     );
   }
 });
