@@ -7,6 +7,7 @@ import { LoginForm } from "../imports/ui/LoginForm";
 import { ProtectedRoutes } from "../imports/tools/ProtectedRoutes";
 import { TaskList } from "../imports/ui/TaskList";
 import { EdtiTask } from "../imports/ui/EditTask";
+import { Profile } from "../imports/ui/Profile";
 
 Meteor.startup(() => {
   render(
@@ -18,6 +19,7 @@ Meteor.startup(() => {
           <Route path="/App" element={<App />} />
           <Route path="/Tasks" element={<TaskList />} />
           <Route path="/EditTask" element={<EdtiTask />} />
+          <Route path="/Profile" element={<Profile />} />
         </Route>
       </Routes>
     </Router>,

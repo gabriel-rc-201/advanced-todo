@@ -97,7 +97,7 @@ Meteor.methods({
 
     if (!this.userId) throw new Meteor.Error("Not authorized.");
 
-    const task = TasksCollection.findOne({ _id: taskId, userId: this.userId });
+    const task = TasksCollection.findOne({ _id: taskId });
 
     if (!task) throw new Meteor.Error("Access denied");
 

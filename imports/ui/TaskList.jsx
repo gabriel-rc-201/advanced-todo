@@ -46,10 +46,15 @@ export const TaskList = () => {
 
   return (
     <Box className="main">
-      <Box className="user" onClick={logout}>
-        <Typography>{user.username || user.profile.name}</Typography>
-        <ExitToApp sx={{ color: "red" }} />
-        <Logout sx={{ color: "red" }} />
+      <Box
+        className="user"
+        onClick={() => {
+          navigate("/Profile");
+        }}
+      >
+        <Typography>{user.username}</Typography>
+        {/* <ExitToApp sx={{ color: "red" }} />
+        <Logout sx={{ color: "red" }} /> */}
       </Box>
 
       {isLoading && <Box className="loading">loading...</Box>}
