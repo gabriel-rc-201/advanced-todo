@@ -17,7 +17,9 @@ const changeStatus = ({ _id }, status) =>
 export const TaskList = () => {
   const user = useTracker(() => Meteor.user());
 
-  const userFilter = user ? { userId: user._id } : {};
+  const privacyFilter = user
+    ? { $or: [{ userId: user._id }, { isPrivate: false }] }
+    : {};
 
   const { tasks, isLoading } = useTracker(() => {
     if (!Meteor.user()) {
@@ -28,7 +30,7 @@ export const TaskList = () => {
 
     if (!handler.ready()) return { tasks: [], isLoading: true };
 
-    const tasks = TasksCollection.find(userFilter, {
+    const tasks = TasksCollection.find(privacyFilter, {
       sort: { createdAt: -1 },
     }).fetch();
 

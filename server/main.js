@@ -5,13 +5,20 @@ import { TasksCollection } from "../imports/db/TasksCollection";
 import "../imports/api/tasksMethods";
 import "../imports/api/tasksPublications";
 
-const insertTask = (taskName, taskDescription, taskStatus, user) =>
+const insertTask = (
+  taskName,
+  taskDescription,
+  taskStatus,
+  user,
+  taskPrivacy = true
+) =>
   TasksCollection.insert({
     userId: user._id,
     author: user.username,
     name: taskName,
     description: taskDescription,
     status: taskStatus,
+    isPrivate: taskPrivacy,
     date: new Date(),
     createdAt: new Date(),
   });
@@ -27,7 +34,7 @@ Meteor.startup(() => {
     });
     Accounts.createUser({
       username: "teste",
-      password: "senha",
+      password: "teste",
     });
   }
 
