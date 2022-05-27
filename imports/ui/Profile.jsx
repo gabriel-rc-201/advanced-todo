@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Button,
 } from "@mui/material";
 
 export const Profile = () => {
@@ -48,10 +49,10 @@ export const Profile = () => {
       </Box>
       <Box>
         <FormControl sx={{ width: 230 }}>
-          <InputLabel id="sexo-label">Sexo</InputLabel>
+          <InputLabel id="sexo-label">Sexo Biológico</InputLabel>
           <Select
             defaultValue={user.profile.sexo}
-            label="sexo"
+            label="sexo Biológico"
             variant="outlined"
             name="sexo"
           >
@@ -68,6 +69,21 @@ export const Profile = () => {
           type="text"
           name="empresa"
         />
+      </Box>
+      <Box
+        sx={{ display: "grid", gap: 4, gridTemplateColumns: "repeat(2, 1fr)" }}
+      >
+        <Button
+          sx={{ bgcolor: "red" }}
+          color="error"
+          variant="contained"
+          onClick={() => navigate(-1)}
+        >
+          Cancel
+        </Button>
+        <Button type="submit" variant="contained">
+          Save
+        </Button>
       </Box>
     </Box>
   );
