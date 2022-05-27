@@ -1,4 +1,13 @@
-import { Box, TextField, Typography, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -16,9 +25,10 @@ export const EdtiTask = () => {
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
   const [date, setDate] = useState(new Date(task.date));
+  const [privacy, setPrivacy] = useState(task.privacy);
 
-  const editTask = ({ _id, name, description, author, status, date }) =>
-    Meteor.call("tasks.edit", { _id, name, description, author, status, date });
+  const editTask = ({ _id, name, description, date, isPrivate }) =>
+    Meteor.call("tasks.edit", { _id, name, description, date, isPrivate });
 
   const submit = (e) => {
     e.preventDefault();
@@ -27,6 +37,7 @@ export const EdtiTask = () => {
       name,
       description,
       date: new Date(date),
+      isPrivate: privacy,
     });
     navigate(-1);
   };
@@ -76,6 +87,23 @@ export const EdtiTask = () => {
             shrink: true,
           }}
         />
+      </Box>
+
+      <Box>
+        <FormControl>
+          <InputLabel id="eh-privada"> é privada</InputLabel>
+          <Select
+            disabled={cantEdit}
+            labelId="eh-privada"
+            defaultValue={task.isPrivate}
+            label="e privada"
+            sx={{ width: 230 }}
+            onChange={(e) => setPrivacy(e.target.value)}
+          >
+            <MenuItem value={true}>sim</MenuItem>
+            <MenuItem value={false}>não</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
 
       <Box

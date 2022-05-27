@@ -2,5 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { TasksCollection } from "../db/TasksCollection";
 
 Meteor.publish("tasks", function publishTasks() {
-  return TasksCollection.find({ isPrivate: true });
+  return TasksCollection.find({
+    $or: [{ userId: this.userId }, { isPrivate: false }],
+  });
 });

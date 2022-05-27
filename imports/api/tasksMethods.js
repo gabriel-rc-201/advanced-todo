@@ -73,7 +73,7 @@ Meteor.methods({
   },
 
   "tasks.edit"(taskUpdated) {
-    const { _id, name, description, date } = taskUpdated;
+    const { _id, name, description, date, isPrivate } = taskUpdated;
 
     editSchema.validate({ name, description, date });
 
@@ -86,7 +86,7 @@ Meteor.methods({
     if (!task) throw new Meteor.Error("Access denied");
 
     TasksCollection.update(_id, {
-      $set: { name, description, date, updatedAt: new Date() },
+      $set: { name, description, date, isPrivate, updatedAt: new Date() },
     });
   },
 
