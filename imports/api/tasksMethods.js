@@ -10,7 +10,7 @@ SimpleSchema.defineValidationErrorTransform((error) => {
   return ddpError;
 });
 
-const schema = new SimpleSchema(
+const createSchema = new SimpleSchema(
   {
     name: { type: String },
     author: { type: String },
@@ -18,7 +18,26 @@ const schema = new SimpleSchema(
     date: { type: Date },
     status: {
       type: String,
-      allowedValues: ["cadastrada", "em andamento", "comcluida"],
+      allowedValues: ["cadastrada", "em-andamento", "comcluida"],
+    },
+  },
+  { check }
+);
+
+const editSchema = new SimpleSchema(
+  {
+    name: { type: String },
+    description: { type: String },
+    date: { type: Date },
+  },
+  { check }
+);
+
+const statusSchema = new SimpleSchema(
+  {
+    status: {
+      type: String,
+      allowedValues: ["cadastrada", "em-andamento", "comcluida"],
     },
   },
   { check }
@@ -26,7 +45,7 @@ const schema = new SimpleSchema(
 
 Meteor.methods({
   "tasks.insert"(name, author, status, description, date) {
-    schema.validate({ name, author, status, description, date });
+    createSchema.validate({ name, author, status, description, date });
 
     if (!this.userId) throw new Meteor.Error("Not authorized.");
 
@@ -54,23 +73,34 @@ Meteor.methods({
   },
 
   "tasks.edit"(taskUpdated) {
-    const { _id, name, description, author, status, date } = taskUpdated;
+    const { _id, name, description, date } = taskUpdated;
 
-    schema.validate({ name, author, status, description, date });
+    editSchema.validate({ name, description, date });
 
     check(_id, String);
 
     if (!this.userId) throw new Meteor.Error("Not authorized");
 
-    const task = TasksCollection.findOne({
-      _id,
-      userId: this.userId,
-    });
+    const task = TasksCollection.findOne({ _id, userId: this.userId });
 
     if (!task) throw new Meteor.Error("Access denied");
 
     TasksCollection.update(_id, {
-      $set: { name, description, status, date, updatedAt: new Date() },
+      $set: { name, description, date, updatedAt: new Date() },
     });
+  },
+
+  "tasks.changeStatus"(taskId, status) {
+    check(taskId, String);
+
+    statusSchema.validate({ status });
+
+    if (!this.userId) throw new Meteor.Error("Not authorized.");
+
+    const task = TasksCollection.findOne({ _id: taskId, userId: this.userId });
+
+    if (!task) throw new Meteor.Error("Access denied");
+
+    TasksCollection.update(taskId, { $set: { status } });
   },
 });

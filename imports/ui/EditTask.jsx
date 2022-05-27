@@ -11,11 +11,10 @@ export const EdtiTask = () => {
 
   const navigate = useNavigate();
 
-  const [canEdit, setCanEdit] = useState(false);
+  const [cantEdit, setCanEdit] = useState(true);
 
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
-  // const [status, setStatus] = useState(task.status);
   const [date, setDate] = useState(new Date(task.date));
 
   const editTask = ({ _id, name, description, author, status, date }) =>
@@ -28,15 +27,13 @@ export const EdtiTask = () => {
       name,
       description,
       date: new Date(date),
-      author: task.author,
-      status: task.status,
     });
     navigate(-1);
   };
 
   return (
     <Box component="form" className="login-form" onSubmit={submit}>
-      <Button onClick={() => setCanEdit(!canEdit)} variant="contained">
+      <Button onClick={() => setCanEdit(!cantEdit)} variant="contained">
         Editar
       </Button>
 
@@ -45,7 +42,7 @@ export const EdtiTask = () => {
       </Typography>
       <Box>
         <TextField
-          disabled={canEdit ? false : true}
+          disabled={cantEdit}
           label="task name"
           variant="outlined"
           type="text"
@@ -56,7 +53,7 @@ export const EdtiTask = () => {
       </Box>
       <Box>
         <TextField
-          disabled={canEdit ? false : true}
+          disabled={cantEdit}
           label="task description"
           variant="outlined"
           type="text"
@@ -66,15 +63,13 @@ export const EdtiTask = () => {
         />
       </Box>
 
-      <Typography gutterBottom align="center">
-        {`${date}`}
-      </Typography>
       <Box>
         <TextField
-          disabled={canEdit ? false : true}
+          disabled={cantEdit}
           label="task date"
-          type="datetime-local"
+          type="date"
           name="date"
+          defaultValue={task.date.toISOString().split("T")[0]}
           onChange={(e) => setDate(e.target.value)}
           sx={{ width: 230 }}
           InputLabelProps={{
@@ -82,20 +77,6 @@ export const EdtiTask = () => {
           }}
         />
       </Box>
-
-      {/* <FormControl sx={{ maxWidth: 230, minWidth: 230 }}>
-        <InputLabel id="task status">task status</InputLabel>
-        <Select
-          disabled={canEdit ? true : false}
-          labelId="task status"
-          label="task status"
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <MenuItem value="cadastrada">cadastrada</MenuItem>
-          <MenuItem value="em andamento">em andamento</MenuItem>
-          <MenuItem value="comcluida">comcluída</MenuItem>
-        </Select>
-      </FormControl> */}
 
       <Box
         sx={{ display: "grid", gap: 4, gridTemplateColumns: "repeat(2, 1fr)" }}
@@ -108,11 +89,7 @@ export const EdtiTask = () => {
         >
           Cancel
         </Button>
-        <Button
-          disabled={canEdit ? false : true}
-          type="submit"
-          variant="contained"
-        >
+        <Button disabled={cantEdit} type="submit" variant="contained">
           Save
         </Button>
       </Box>

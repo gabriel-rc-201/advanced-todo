@@ -11,6 +11,9 @@ import { Task } from "./Tasks";
 
 const deleteTask = ({ _id }) => Meteor.call("tasks.remove", _id);
 
+const changeStatus = ({ _id }, status) =>
+  Meteor.call("tasks.changeStatus", _id, status);
+
 export const TaskList = () => {
   const user = useTracker(() => Meteor.user());
 
@@ -51,7 +54,12 @@ export const TaskList = () => {
 
       <List className="tasks" sx={{ bgcolor: "background.paper" }}>
         {tasks.map((task) => (
-          <Task key={task._id} task={task} onDeleteClick={deleteTask} />
+          <Task
+            key={task._id}
+            task={task}
+            onDeleteClick={deleteTask}
+            onChangeStatus={changeStatus}
+          />
         ))}
       </List>
     </Box>

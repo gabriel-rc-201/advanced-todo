@@ -97,6 +97,10 @@ body {
   background-color: #ff3046;
 }
 
-.checked {
+.comcluida {
   background-color: rgb(75, 238, 75);
+}
+
+.em-andamento {
+  background-color: rgb(250, 168, 44);
 }
