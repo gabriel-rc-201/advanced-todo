@@ -31,10 +31,24 @@ Meteor.startup(() => {
     Accounts.createUser({
       username: SEED_USERNAME,
       password: SEED_PASSWORD,
+      email: "meteorite@meteor.com",
+      profile: {
+        birthdate: new Date(),
+        sexo: "X",
+        empresa: "empresa dos meteoros",
+        avatar: null,
+      },
     });
     Accounts.createUser({
       username: "teste",
-      password: "teste",
+      password: "passteste",
+      email: "teste@teste.com",
+      profile: {
+        birthdate: new Date(),
+        sexo: "M",
+        empresa: "empresa dos testes",
+        avatar: null,
+      },
     });
   }
 
