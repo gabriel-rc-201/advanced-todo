@@ -23,7 +23,7 @@ const userSchema = new SimpleSchema(
 );
 
 Meteor.methods({
-  "account.update"({ _id, birthdate, sexo, empresa }) {
+  "account.update"({ _id, birthdate, sexo, empresa, avatar }) {
     userSchema.validate({
       _id,
       birthdate,
@@ -38,7 +38,7 @@ Meteor.methods({
 
     Meteor.users.update(_id, {
       $set: {
-        profile: { birthdate, sexo, empresa },
+        profile: { birthdate, sexo, empresa, avatar },
       },
     });
   },

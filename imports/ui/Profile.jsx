@@ -11,7 +11,22 @@ import {
   Select,
   TextField,
   Button,
+  IconButton,
+  Avatar,
 } from "@mui/material";
+import { PhotoCamera } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+
+const Input = styled("input")({ display: "none" });
+
+const convert = (file) => {
+  return new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => res(reader.result);
+    reader.onerror = (error) => rej(error);
+  });
+};
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -20,30 +35,68 @@ export const Profile = () => {
   const [birthdate, setBirthdate] = useState(new Date(user.profile.birthdate));
   const [sexo, setSexo] = useState(user.profile.sexo);
   const [empresa, setEmpresa] = useState(user.profile.empresa);
+  const [profilePhoto, setProfilePhoto] = useState();
 
-  const updateProfile = ({ _id, birthdate, sexo, empresa }) =>
+  const updateProfile = ({ _id, birthdate, sexo, empresa, avatar }) =>
     Meteor.call("account.update", {
       _id,
       birthdate,
       sexo,
       empresa,
+      avatar,
     });
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
 
-    updateProfile({
-      _id: user._id,
-      birthdate: new Date(birthdate),
-      sexo,
-      empresa,
-    });
+    if (profilePhoto) {
+      const avatar = await convert(profilePhoto[0]);
 
-    navigate(-1);
+      updateProfile({
+        _id: user._id,
+        birthdate: new Date(birthdate),
+        sexo,
+        empresa,
+        avatar,
+      });
+
+      navigate(-1);
+    } else {
+      updateProfile({
+        _id: user._id,
+        birthdate: new Date(birthdate),
+        sexo,
+        empresa,
+      });
+
+      navigate(-1);
+    }
   };
 
   return (
     <Box component="form" className="login-form" onSubmit={submit}>
+      <Box>
+        <Avatar alt="your profile photo" src={user.profile.avatar} />
+      </Box>
+      <Box>
+        <label htmlFor="icon-button-file">
+          <Input
+            accept="image/*"
+            id="icon-button-file"
+            type="file"
+            onChange={(e) => {
+              setProfilePhoto(e.target.files);
+            }}
+          />
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+          >
+            <PhotoCamera />
+          </IconButton>
+        </label>
+      </Box>
       <Box>
         <TextField
           disabled
@@ -77,7 +130,7 @@ export const Profile = () => {
       </Box>
       <Box>
         <FormControl sx={{ width: 230 }}>
-          <InputLabel id="sexo-label">Sexo Biológico</InputLabel>
+          <InputLabel id="sexo-label">Sexo</InputLabel>
           <Select
             defaultValue={user.profile.sexo}
             label="sexo"
