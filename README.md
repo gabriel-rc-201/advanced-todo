@@ -33,11 +33,11 @@ informações da tarefa:
 - [x] somente o usuário que criou a tarefa consiga alterá-la ou excluí-la, no entanto todos podem vê-la.
 - [x] Altere o sistema para permitir que seja informada se a tarefa é pessoal ou não. Neste caso, se for uma tarefa pessoal, somente o usuário que criou a tarefa pode vê-la. _Trate essa restrição de visibilidade através da **publicação do Meteor**_.
 - [ ] user profile com os seguintes campos:
-  - Nome,
-  - Email,
-  - Data de Nascimento,
-  - Sexo (utilizando combobox/selects),
-  - Empresa que trabalha e
+  - [x] Nome,
+  - [x] Email,
+  - [x] Data de Nascimento,
+  - [x] Sexo (utilizando combobox/selects),
+  - [x] Empresa que trabalha e
   - Foto (A foto deve ser salva em banco de dados utilizando base64).
 - [ ] Drawer com dois links, um para acessar a lista de tarefas e outro para acessar os dados do usuário logado. Os dados (foto, nome e email) do usuário logado devem estar visíveis na parte de cima do Drawer.
 - [ ] Altere a tela de boas vindas, que é apresentada quando o usuário faz login, para exibir um Dashboard das tarefas contendo as informações (que podem ser implementadas com cards): Total de Tarefas Cadastradas, Total de Tarefas em Andamento e Total de Tarefas Concluídas. Nesse dashboard deve ter também uma ação para acessar a lista com todas as tarefas.

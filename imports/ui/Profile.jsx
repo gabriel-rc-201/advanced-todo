@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Meteor } from "meteor/meteor";
@@ -17,10 +17,36 @@ export const Profile = () => {
   const navigate = useNavigate();
   const user = useTracker(() => Meteor.user());
 
+  const [birthdate, setBirthdate] = useState(new Date(user.profile.birthdate));
+  const [sexo, setSexo] = useState(user.profile.sexo);
+  const [empresa, setEmpresa] = useState(user.profile.empresa);
+
+  const updateProfile = ({ _id, birthdate, sexo, empresa }) =>
+    Meteor.call("account.update", {
+      _id,
+      birthdate,
+      sexo,
+      empresa,
+    });
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    updateProfile({
+      _id: user._id,
+      birthdate: new Date(birthdate),
+      sexo,
+      empresa,
+    });
+
+    navigate(-1);
+  };
+
   return (
-    <Box componet="form" className="login-form">
+    <Box component="form" className="login-form" onSubmit={submit}>
       <Box>
         <TextField
+          disabled
           defaultValue={user.username}
           label="username"
           variant="outlined"
@@ -30,6 +56,7 @@ export const Profile = () => {
       </Box>
       <Box>
         <TextField
+          disabled
           defaultValue={user.emails[0].address}
           label="email"
           variant="outlined"
@@ -45,6 +72,7 @@ export const Profile = () => {
           variant="outlined"
           type="date"
           name="birthdate"
+          onChange={(e) => setBirthdate(e.target.value)}
         />
       </Box>
       <Box>
@@ -55,6 +83,7 @@ export const Profile = () => {
             label="sexo Biológico"
             variant="outlined"
             name="sexo"
+            onChange={(e) => setSexo(e.target.value)}
           >
             <MenuItem value="M">Masculino</MenuItem>
             <MenuItem value="F">Feminino</MenuItem>
@@ -68,6 +97,7 @@ export const Profile = () => {
           variant="outlined"
           type="text"
           name="empresa"
+          onChange={(e) => setEmpresa(e.target.value)}
         />
       </Box>
       <Box
