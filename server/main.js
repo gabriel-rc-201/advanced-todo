@@ -36,7 +36,7 @@ Meteor.startup(() => {
       email: "meteorite@meteor.com",
       profile: {
         birthdate: new Date(),
-        sexo: "X",
+        sexo: "N",
         empresa: "empresa dos meteoros",
         avatar: null,
       },

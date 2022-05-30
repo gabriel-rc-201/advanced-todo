@@ -15,7 +15,7 @@ const userSchema = new SimpleSchema(
     birthdate: { type: Date },
     sexo: {
       type: String,
-      allowedValues: ["M", "F"],
+      allowedValues: ["M", "F", "X", "N"],
     },
     empresa: { type: String },
   },

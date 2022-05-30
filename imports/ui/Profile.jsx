@@ -80,13 +80,15 @@ export const Profile = () => {
           <InputLabel id="sexo-label">Sexo Biológico</InputLabel>
           <Select
             defaultValue={user.profile.sexo}
-            label="sexo Biológico"
+            label="sexo"
             variant="outlined"
             name="sexo"
             onChange={(e) => setSexo(e.target.value)}
           >
             <MenuItem value="M">Masculino</MenuItem>
             <MenuItem value="F">Feminino</MenuItem>
+            <MenuItem value="X">LGBTQIA+</MenuItem>
+            <MenuItem value="N">Não Informar</MenuItem>
           </Select>
         </FormControl>
       </Box>
