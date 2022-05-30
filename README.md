@@ -20,15 +20,15 @@
 
 informações da tarefa:
 
-- Nome;
-- Descrição;
-- Situação;
-  - Cadastrada;
-  - Em andamento;
-  - Comcluída.  
-    **NOTA:** Na tela de visualização deve existir um comando que passa a tarefa de Cadastrada para Em Andamento, um que passa a tarefa de Em Andamento para Concluída e um outro que passa a tarefa para Cadastrada, independente do estado que ela esteja. Lembre-se de deixar o comando desabilitado quando não for possível realizar uma transição (Exemplo: O usuário não pode clicar na ação Concluir sem que a tarefa esteja na situação Em Andamento)
-- Data;
-- e usuários que criou a tarefa.
+- [x] Nome;
+- [x] Descrição;
+- [x] Situação;
+  - [x] Cadastrada;
+  - [x] Em andamento;
+  - [x] Comcluída.  
+         **NOTA:** Na tela de visualização deve existir um comando que passa a tarefa de Cadastrada para Em Andamento, um que passa a tarefa de Em Andamento para Concluída e um outro que passa a tarefa para Cadastrada, independente do estado que ela esteja. Lembre-se de deixar o comando desabilitado quando não for possível realizar uma transição (Exemplo: O usuário não pode clicar na ação Concluir sem que a tarefa esteja na situação Em Andamento)
+- [x] Data;
+- [x] e usuários que criou a tarefa.
 
 - [x] somente o usuário que criou a tarefa consiga alterá-la ou excluí-la, no entanto todos podem vê-la.
 - [x] Altere o sistema para permitir que seja informada se a tarefa é pessoal ou não. Neste caso, se for uma tarefa pessoal, somente o usuário que criou a tarefa pode vê-la. _Trate essa restrição de visibilidade através da **publicação do Meteor**_.
@@ -39,12 +39,14 @@ informações da tarefa:
   - [x] Sexo (utilizando combobox/selects),
   - [x] Empresa que trabalha e
   - Foto (A foto deve ser salva em banco de dados utilizando base64).
+- [ ] tela de cadastro de usuários
+- [ ] tela de adcionar tarefa
 - [ ] Drawer com dois links, um para acessar a lista de tarefas e outro para acessar os dados do usuário logado. Os dados (foto, nome e email) do usuário logado devem estar visíveis na parte de cima do Drawer.
 - [ ] Altere a tela de boas vindas, que é apresentada quando o usuário faz login, para exibir um Dashboard das tarefas contendo as informações (que podem ser implementadas com cards): Total de Tarefas Cadastradas, Total de Tarefas em Andamento e Total de Tarefas Concluídas. Nesse dashboard deve ter também uma ação para acessar a lista com todas as tarefas.
 
 ## EXTRAS
 
-- [ ] Ajuste visualmente sua aplicação para exercitar seus conhecimentos de CSS e criação de componentes REAC
+- [ ] Ajuste visualmente sua aplicação para exercitar seus conhecimentos de CSS e criação de componentes REACT
 - [ ] Na lista de tarefas deve ser inserido um checkbox que permite exibir também as tarefas concluídas. Quando ele está desmarcado é para exibir somente as tarefas nas situações “Cadastrada” e “Em Andamento”. (Sugestão: Utilize ReactiveVar do Meteor)
       **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor
 - [ ] Crie uma “campo de pesquisa” que permite filtrar as tarefas de acordo com o texto indicado. O Filtro deverá ser pelo nome da tarefa.
