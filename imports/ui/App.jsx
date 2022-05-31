@@ -6,9 +6,49 @@ import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 
 import { NavigationDrawer } from "./NavigationDrawer";
+import { TasksCollection } from "../db/TasksCollection";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
+
+  const isLoading = useTracker(() => {
+    const handler = Meteor.subscribe("tasks");
+    if (!handler.ready()) return { tasks: [], isLoading: true };
+  });
+
+  const tasks = useTracker(() => {
+    if (!Meteor.user()) {
+      return { tasks: [] };
+    }
+
+    const handler = Meteor.subscribe("tasks");
+
+    if (!handler.ready()) return [];
+
+    const tasks = TasksCollection.find(
+      {},
+      {
+        sort: { createdAt: -1 },
+      }
+    ).fetch();
+
+    return tasks;
+  });
+
+  const numTasksCadastradas = tasks.filter((task) => {
+    if (task.status === "cadastrada") return true;
+    return false;
+  }).length;
+
+  const numTasksEmAndamento = tasks.filter((task) => {
+    if (task.status === "em-andamento") return true;
+    return false;
+  }).length;
+
+  const numTasksConcluidas = tasks.filter((task) => {
+    if (task.status === "comcluida") return true;
+    return false;
+  }).length;
 
   const navigate = useNavigate();
 
@@ -17,6 +57,9 @@ export const App = () => {
       <Box className="user">
         <NavigationDrawer />
       </Box>
+
+      {isLoading && <Box className="loading">loading...</Box>}
+
       <Typography variant="h1" align="center" fontSize={40}>
         Olá {user.username}!!! Bem vindo ao To Do's List
       </Typography>
@@ -37,6 +80,7 @@ export const App = () => {
           }}
         >
           <Typography>total de tarefas cadastradas</Typography>
+          <Typography variant="h2">{numTasksCadastradas}</Typography>
         </Box>
         <Box
           sx={{
@@ -47,6 +91,7 @@ export const App = () => {
           }}
         >
           <Typography>total de tarefas concluídas</Typography>
+          <Typography variant="h2">{numTasksConcluidas}</Typography>
         </Box>
         <Box
           sx={{
@@ -56,7 +101,8 @@ export const App = () => {
             textAlign: "center",
           }}
         >
-          <Typography>total de tarefas a serem conculuídas</Typography>
+          <Typography>total de tarefas em andamento</Typography>
+          <Typography variant="h2">{numTasksEmAndamento}</Typography>
         </Box>
         <Box
           component="button"

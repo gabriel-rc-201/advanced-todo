@@ -14,9 +14,7 @@ export const Task = ({ task, onDeleteClick, onChangeStatus }) => {
   const navigate = useNavigate();
   return (
     <ListItem
-      className={
-        task.status === "cadastrada" ? "" : `${task.status}` + ` task-item`
-      }
+      className={task.status === "cadastrada" ? "" : `${task.status}`}
       disablePadding
     >
       <Box>

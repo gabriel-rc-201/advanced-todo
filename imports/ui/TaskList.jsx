@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Fab, List, Typography } from "@mui/material";
+import { Box, Fab, List } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
 import { Meteor } from "meteor/meteor";
@@ -39,11 +39,6 @@ export const TaskList = () => {
   });
 
   const navigate = useNavigate();
-
-  const logout = () => {
-    Meteor.logout();
-    navigate("/");
-  };
 
   return (
     <Box className="main">
