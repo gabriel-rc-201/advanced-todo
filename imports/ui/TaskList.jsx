@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, List, Typography } from "@mui/material";
-import { ExitToApp, Logout } from "@mui/icons-material";
+import { Box, Fab, List, Typography } from "@mui/material";
+import { ExitToApp, Logout, Add } from "@mui/icons-material";
 
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
@@ -69,6 +69,17 @@ export const TaskList = () => {
           />
         ))}
       </List>
+
+      <Box>
+        <Fab
+          sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 10 }}
+          color="primary"
+          aria-label="add"
+          onClick={() => navigate("/CreateTask")}
+        >
+          <Add />
+        </Fab>
+      </Box>
     </Box>
   );
 };

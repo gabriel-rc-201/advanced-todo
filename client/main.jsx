@@ -9,6 +9,7 @@ import { TaskList } from "../imports/ui/TaskList";
 import { EdtiTask } from "../imports/ui/EditTask";
 import { Profile } from "../imports/ui/Profile";
 import { CreateAccountForm } from "../imports/ui/CreateAccountForm";
+import { CreateTask } from "../imports/ui/CreateTask";
 
 Meteor.startup(() => {
   render(
@@ -21,6 +22,7 @@ Meteor.startup(() => {
           <Route path="/App" element={<App />} />
           <Route path="/Tasks" element={<TaskList />} />
           <Route path="/EditTask" element={<EdtiTask />} />
+          <Route path="/CreateTask" element={<CreateTask />} />
           <Route path="/Profile" element={<Profile />} />
         </Route>
       </Routes>

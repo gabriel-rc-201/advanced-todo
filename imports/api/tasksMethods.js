@@ -16,10 +16,6 @@ const createSchema = new SimpleSchema(
     author: { type: String },
     description: { type: String },
     date: { type: Date },
-    status: {
-      type: String,
-      allowedValues: ["cadastrada", "em-andamento", "comcluida"],
-    },
   },
   { check }
 );
@@ -44,8 +40,8 @@ const statusSchema = new SimpleSchema(
 );
 
 Meteor.methods({
-  "tasks.insert"(name, author, status, description, date) {
-    createSchema.validate({ name, author, status, description, date });
+  "tasks.insert"({ name, author, description, date }) {
+    createSchema.validate({ name, author, description, date });
 
     if (!this.userId) throw new Meteor.Error("Not authorized.");
 
@@ -54,7 +50,8 @@ Meteor.methods({
       author,
       name,
       description,
-      status,
+      status: "cadastrada",
+      isPrivate: true,
       date,
       createdAt: new Date(),
     });
