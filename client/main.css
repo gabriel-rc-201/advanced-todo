@@ -75,6 +75,13 @@ body {
   display: flex;
   padding: 16px;
   border-bottom: #eee solid 1px;
+
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1rem;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .tasks > li > span {
@@ -89,7 +96,8 @@ body {
   background-color: rgb(250, 168, 44);
 }
 
-@media only screen and (max-width: 600) {
-  .task-item {
+@media (min-width: 780px) {
+  .tasks > li {
+    gap: 10rem;
   }
 }
