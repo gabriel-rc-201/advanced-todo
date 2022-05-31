@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 
+import { NavigationDrawer } from "./NavigationDrawer";
+
 export const CreateTask = () => {
   const navigate = useNavigate();
   const user = useTracker(() => Meteor.user());
@@ -30,6 +32,9 @@ export const CreateTask = () => {
 
   return (
     <Box component="form" className="login-form" onSubmit={submit}>
+      <Box className="user">
+        <NavigationDrawer className="user" />
+      </Box>
       <Typography gutterBottom variant="h1" align="center" fontSize={30}>
         Criar Uma Nova Tarefa
       </Typography>
@@ -67,7 +72,11 @@ export const CreateTask = () => {
       </Box>
 
       <Box
-        sx={{ display: "grid", gap: 4, gridTemplateColumns: "repeat(2, 1fr)" }}
+        sx={{
+          display: "grid",
+          gap: 4,
+          gridTemplateColumns: "repeat(2, 1fr)",
+        }}
       >
         <Button
           sx={{ bgcolor: "red" }}

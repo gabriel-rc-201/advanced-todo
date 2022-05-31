@@ -21,7 +21,6 @@ body {
   right: 0;
   margin: auto;
 
-  justify-content: center;
   align-items: center;
 }
 
@@ -50,16 +49,6 @@ body {
 
   margin: 8px 16px 0;
   font-weight: bold;
-}
-
-.filter {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3px;
-}
-
-.filter > button {
-  background-color: #62807e;
 }
 
 .loading {
@@ -98,4 +87,9 @@ body {
 
 .em-andamento {
   background-color: rgb(250, 168, 44);
+}
+
+@media only screen and (max-width: 600) {
+  .task-item {
+  }
 }

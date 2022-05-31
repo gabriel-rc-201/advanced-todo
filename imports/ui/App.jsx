@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
+
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
-import { useNavigate } from "react-router-dom";
+
+import { NavigationDrawer } from "./NavigationDrawer";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
@@ -11,6 +14,9 @@ export const App = () => {
 
   return (
     <Box className="login-form">
+      <Box className="user">
+        <NavigationDrawer />
+      </Box>
       <Typography variant="h1" align="center" fontSize={40}>
         Olá {user.username}!!! Bem vindo ao To Do's List
       </Typography>

@@ -17,6 +17,8 @@ import {
 import { PhotoCamera } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 
+import { NavigationDrawer } from "./NavigationDrawer";
+
 const Input = styled("input")({ display: "none" });
 
 const convert = (file) => {
@@ -75,8 +77,16 @@ export const Profile = () => {
 
   return (
     <Box component="form" className="login-form" onSubmit={submit}>
+      <Box className="user">
+        <NavigationDrawer />
+      </Box>
       <Box>
-        <Avatar alt="your profile photo" src={user.profile.avatar} />
+        <Avatar
+          alt="your profile photo"
+          src={!!user.profile.avatar ? user.profile.avatar : ""}
+        >
+          {user.username[0].toUpperCase()}
+        </Avatar>
       </Box>
       <Box>
         <label htmlFor="icon-button-file">
@@ -156,7 +166,11 @@ export const Profile = () => {
         />
       </Box>
       <Box
-        sx={{ display: "grid", gap: 4, gridTemplateColumns: "repeat(2, 1fr)" }}
+        sx={{
+          display: "grid",
+          gap: 4,
+          gridTemplateColumns: "repeat(2, 1fr)",
+        }}
       >
         <Button
           sx={{ bgcolor: "red" }}

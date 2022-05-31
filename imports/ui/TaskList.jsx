@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Fab, List, Typography } from "@mui/material";
-import { ExitToApp, Logout, Add } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
 
 import { TasksCollection } from "../db/TasksCollection";
 import { Task } from "./Tasks";
+import { NavigationDrawer } from "./NavigationDrawer";
 
 const deleteTask = ({ _id }) => Meteor.call("tasks.remove", _id);
 
@@ -46,15 +47,8 @@ export const TaskList = () => {
 
   return (
     <Box className="main">
-      <Box
-        className="user"
-        onClick={() => {
-          navigate("/Profile");
-        }}
-      >
-        <Typography>{user.username}</Typography>
-        {/* <ExitToApp sx={{ color: "red" }} />
-        <Logout sx={{ color: "red" }} /> */}
+      <Box className="user">
+        <NavigationDrawer />
       </Box>
 
       {isLoading && <Box className="loading">loading...</Box>}
@@ -72,7 +66,7 @@ export const TaskList = () => {
 
       <Box>
         <Fab
-          sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 10 }}
+          sx={{ position: "fixed", bottom: 20, right: 20, zIndex: 10 }}
           color="primary"
           aria-label="add"
           onClick={() => navigate("/CreateTask")}
