@@ -42,4 +42,22 @@ Meteor.methods({
       },
     });
   },
+
+  "account.create"({ username, password, email, birthdate, sexo, empresa }) {
+    check(username, String);
+    check(password, String);
+    if (Accounts.findUserByUsername(username))
+      throw new Meteor.Error("User already exists!!!");
+    Accounts.createUser({
+      username,
+      password,
+      email,
+      profile: {
+        birthdate,
+        sexo,
+        empresa,
+        avatar: null,
+      },
+    });
+  },
 });

@@ -8,12 +8,14 @@ import { ProtectedRoutes } from "../imports/tools/ProtectedRoutes";
 import { TaskList } from "../imports/ui/TaskList";
 import { EdtiTask } from "../imports/ui/EditTask";
 import { Profile } from "../imports/ui/Profile";
+import { CreateAccountForm } from "../imports/ui/CreateAccountForm";
 
 Meteor.startup(() => {
   render(
     <Router>
       <Routes>
         <Route path="/" exact={true} element={<LoginForm />} />
+        <Route path="/CreateAccount" element={<CreateAccountForm />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/App" element={<App />} />

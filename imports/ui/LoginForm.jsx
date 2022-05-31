@@ -1,7 +1,7 @@
 import { Box, TextField, Button, Typography } from "@mui/material";
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -48,6 +48,7 @@ export const LoginForm = () => {
           Log In
         </Button>
       </Box>
+      <Link to="/CreateAccount">Create Accounte !!</Link>
     </Box>
   );
 };
