@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   FormGroup,
   List,
+  TextField,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
@@ -32,6 +33,16 @@ export const TaskList = () => {
     else setFilter({});
 
     setHideCompleted(!hideCompleted);
+  };
+
+  const searchFilter = (pesquisa) => {
+    if (pesquisa) {
+      setFilter({ name: { $regex: pesquisa, $options: "i" } });
+      setHideCompleted(false);
+    } else {
+      setFilter({ status: { $ne: "concluida" } });
+      setHideCompleted(false);
+    }
   };
 
   const { tasks, isLoading } = useTracker(() => {
@@ -62,13 +73,17 @@ export const TaskList = () => {
       </Box>
 
       <Box>
-        <FormGroup>
+        <FormGroup onChange={checkboxFilter}>
           <FormControlLabel
-            control={<Checkbox onChange={checkboxFilter} />}
+            control={<Checkbox checked={hideCompleted} />}
             label="Mostrar Concluídas"
           />
         </FormGroup>
       </Box>
+      <TextField
+        label="pesquise sua tarefa aqui"
+        onChange={(e) => searchFilter(e.target.value)}
+      />
 
       {isLoading && <Box className="loading">loading...</Box>}
 
