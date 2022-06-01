@@ -49,7 +49,7 @@ informações da tarefa:
 - [x] Ajuste visualmente sua aplicação para exercitar seus conhecimentos de CSS e criação de componentes REACT
 - [x] Na lista de tarefas deve ser inserido um checkbox que permite exibir também as tarefas concluídas. Quando ele está desmarcado é para exibir somente as tarefas nas situações “Cadastrada” e “Em Andamento”. (Sugestão: Utilize ReactiveVar do Meteor)  
        **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor
-- [ ] Crie uma “campo de pesquisa” que permite filtrar as tarefas de acordo com o texto indicado. O Filtro deverá ser pelo nome da tarefa. Devem ser retornadas tanto das tarefas pessoas(do usuário logado) quanto as tarefas públicas.  
+- [x] Crie uma “campo de pesquisa” que permite filtrar as tarefas de acordo com o texto indicado. O Filtro deverá ser pelo nome da tarefa. Devem ser retornadas tanto das tarefas pessoas(do usuário logado) quanto as tarefas públicas.  
        **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor
 - [ ] Adicione paginação na lista sde tarefas. O tamanho máximo da página deve ser de 4 tarefas por página.  
        **Observação:** Utilize SKIP e LIMIT nas pesquisas via MongoDB.  
