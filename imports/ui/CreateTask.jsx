@@ -33,7 +33,7 @@ export const CreateTask = () => {
   return (
     <Box component="form" className="login-form" onSubmit={submit}>
       <Box className="user">
-        <NavigationDrawer className="user" />
+        <NavigationDrawer />
       </Box>
       <Typography gutterBottom variant="h1" align="center" fontSize={30}>
         Criar Uma Nova Tarefa

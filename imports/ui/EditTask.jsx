@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Meteor } from "meteor/meteor";
+import { NavigationDrawer } from "./NavigationDrawer";
 
 export const EdtiTask = () => {
   const {
@@ -44,6 +45,9 @@ export const EdtiTask = () => {
 
   return (
     <Box component="form" className="login-form" onSubmit={submit}>
+      <Box className="user">
+        <NavigationDrawer />
+      </Box>
       <Button onClick={() => setCanEdit(!cantEdit)} variant="contained">
         Editar
       </Button>
@@ -107,7 +111,11 @@ export const EdtiTask = () => {
       </Box>
 
       <Box
-        sx={{ display: "grid", gap: 4, gridTemplateColumns: "repeat(2, 1fr)" }}
+        sx={{
+          display: "grid",
+          gap: 4,
+          gridTemplateColumns: "repeat(2, 1fr)",
+        }}
       >
         <Button
           sx={{ bgcolor: "red" }}
