@@ -53,12 +53,12 @@ export const Task = ({ task, onDeleteClick, onChangeStatus }) => {
         <ListItemButton>
           <Button
             disabled={task.status !== "em-andamento"}
-            variant={task.status === "comcluida" ? "outlined" : "contained"}
+            variant={task.status === "concluida" ? "outlined" : "contained"}
             sx={{ fontSize: 10 }}
             color="success"
-            onClick={() => onChangeStatus(task, "comcluida")}
+            onClick={() => onChangeStatus(task, "concluida")}
           >
-            comcluida
+            concluida
           </Button>
         </ListItemButton>
       </Box>

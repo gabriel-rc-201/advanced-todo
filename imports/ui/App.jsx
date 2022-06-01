@@ -12,8 +12,8 @@ export const App = () => {
   const user = useTracker(() => Meteor.user());
 
   const isLoading = useTracker(() => {
-    const handler = Meteor.subscribe("tasks");
-    if (!handler.ready()) return { tasks: [], isLoading: true };
+    const handler = Meteor.subscribe("tasks", {});
+    if (!handler.ready()) return true;
   });
 
   const tasks = useTracker(() => {
@@ -21,7 +21,7 @@ export const App = () => {
       return { tasks: [] };
     }
 
-    const handler = Meteor.subscribe("tasks");
+    const handler = Meteor.subscribe("tasks", {});
 
     if (!handler.ready()) return [];
 
@@ -46,7 +46,7 @@ export const App = () => {
   }).length;
 
   const numTasksConcluidas = tasks.filter((task) => {
-    if (task.status === "comcluida") return true;
+    if (task.status === "concluida") return true;
     return false;
   }).length;
 

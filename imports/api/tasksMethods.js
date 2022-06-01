@@ -33,7 +33,7 @@ const statusSchema = new SimpleSchema(
   {
     status: {
       type: String,
-      allowedValues: ["cadastrada", "em-andamento", "comcluida"],
+      allowedValues: ["cadastrada", "em-andamento", "concluida"],
     },
   },
   { check }

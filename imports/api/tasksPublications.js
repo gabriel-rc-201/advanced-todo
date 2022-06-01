@@ -1,8 +1,11 @@
 import { Meteor } from "meteor/meteor";
 import { TasksCollection } from "../db/TasksCollection";
 
-Meteor.publish("tasks", function publishTasks() {
+Meteor.publish("tasks", function publishTasks(ClientFilter) {
   return TasksCollection.find({
-    $or: [{ userId: this.userId }, { isPrivate: false }],
+    $and: [
+      { $or: [{ userId: this.userId }, { isPrivate: false }] },
+      ClientFilter,
+    ],
   });
 });

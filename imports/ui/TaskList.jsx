@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Fab, List } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  Fab,
+  FormControlLabel,
+  FormGroup,
+  List,
+} from "@mui/material";
 import { Add } from "@mui/icons-material";
 
 import { Meteor } from "meteor/meteor";
@@ -16,24 +23,32 @@ const changeStatus = ({ _id }, status) =>
   Meteor.call("tasks.changeStatus", _id, status);
 
 export const TaskList = () => {
-  const user = useTracker(() => Meteor.user());
+  const [hideCompleted, setHideCompleted] = useState(false);
 
-  const privacyFilter = user
-    ? { $or: [{ userId: user._id }, { isPrivate: false }] }
-    : {};
+  const [filter, setFilter] = useState({ status: { $ne: "concluida" } });
+
+  const checkboxFilter = () => {
+    if (hideCompleted) setFilter({ status: { $ne: "concluida" } });
+    else setFilter({});
+
+    setHideCompleted(!hideCompleted);
+  };
 
   const { tasks, isLoading } = useTracker(() => {
     if (!Meteor.user()) {
       return { tasks: [] };
     }
 
-    const handler = Meteor.subscribe("tasks");
+    const handler = Meteor.subscribe("tasks", filter);
 
     if (!handler.ready()) return { tasks: [], isLoading: true };
 
-    const tasks = TasksCollection.find(privacyFilter, {
-      sort: { createdAt: -1 },
-    }).fetch();
+    const tasks = TasksCollection.find(
+      {},
+      {
+        sort: { createdAt: -1 },
+      }
+    ).fetch();
 
     return { tasks };
   });
@@ -44,6 +59,15 @@ export const TaskList = () => {
     <Box className="main">
       <Box className="user">
         <NavigationDrawer />
+      </Box>
+
+      <Box>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox onChange={checkboxFilter} />}
+            label="Mostrar Concluídas"
+          />
+        </FormGroup>
       </Box>
 
       {isLoading && <Box className="loading">loading...</Box>}
