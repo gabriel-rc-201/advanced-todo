@@ -9,7 +9,7 @@ import {
   List,
   TextField,
 } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, NavigateBefore, NavigateNext } from "@mui/icons-material";
 
 import { Meteor } from "meteor/meteor";
 import { useTracker } from "meteor/react-meteor-data";
@@ -27,6 +27,8 @@ export const TaskList = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
 
   const [filter, setFilter] = useState({ status: { $ne: "concluida" } });
+
+  const [skip, setSkip] = useState(0);
 
   const checkboxFilter = () => {
     if (hideCompleted) setFilter({ status: { $ne: "concluida" } });
@@ -50,7 +52,7 @@ export const TaskList = () => {
       return { tasks: [] };
     }
 
-    const handler = Meteor.subscribe("tasks", filter);
+    const handler = Meteor.subscribe("tasks", filter, 4, skip);
 
     if (!handler.ready()) return { tasks: [], isLoading: true };
 
@@ -106,6 +108,22 @@ export const TaskList = () => {
           onClick={() => navigate("/CreateTask")}
         >
           <Add />
+        </Fab>
+      </Box>
+      <Box className="navigation">
+        <Fab
+          disabled={skip === 0}
+          color="primary"
+          onClick={() => setSkip(skip - 4)}
+        >
+          <NavigateBefore />
+        </Fab>
+        <Fab
+          disabled={skip >= tasks.length - 3}
+          color="primary"
+          onClick={() => setSkip(skip + 4)}
+        >
+          <NavigateNext />
         </Fab>
       </Box>
     </Box>

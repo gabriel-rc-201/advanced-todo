@@ -51,7 +51,7 @@ informações da tarefa:
        **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor
 - [x] Crie uma “campo de pesquisa” que permite filtrar as tarefas de acordo com o texto indicado. O Filtro deverá ser pelo nome da tarefa. Devem ser retornadas tanto das tarefas pessoas(do usuário logado) quanto as tarefas públicas.  
        **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor
-- [ ] Adicione paginação na lista sde tarefas. O tamanho máximo da página deve ser de 4 tarefas por página.  
+- [x] Adicione paginação na lista de tarefas. O tamanho máximo da página deve ser de 4 tarefas por página.  
        **Observação:** Utilize SKIP e LIMIT nas pesquisas via MongoDB.  
        **ATENÇÃO:** O filtro deve ser feito do lado do servidor, utilizando as publicações do meteor.
 

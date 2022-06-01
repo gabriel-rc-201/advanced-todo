@@ -97,6 +97,16 @@ body {
   background-color: rgb(250, 168, 44);
 }
 
+.navigation {
+  position: fixed;
+  display: flex;
+
+  bottom: 20px;
+  right: 50%;
+
+  z-index: 10;
+}
+
 @media (min-width: 780px) {
   .tasks > li {
     gap: 10rem;
